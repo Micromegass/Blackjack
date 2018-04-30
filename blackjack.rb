@@ -76,9 +76,8 @@ class Deck
                 @cards << Card.new(suit, face)
                 end
             end 
-            @cards.shuffle!
-    end
-
-
+        @cards.shuffle!
+        end
+    end 
 
 end 
