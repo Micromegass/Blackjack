@@ -57,4 +57,28 @@ c2 = Card.new(:clubs, 5)
 
 
 
+class Deck
 
+    attr_reader  :cards
+
+    def initialize 
+
+        @cards = []
+        build_cards
+
+        private 
+            def build_cards 
+                [:clubs, :diamonds, :spades, :hearts].each do |suit|
+                (2..10).each do |number|
+                @cards << Card.new(suit, number)
+                end 
+                ['J', 'Q', 'K', 'A'].each do |face|
+                @cards << Card.new(suit, face)
+                end
+            end 
+            @cards.shuffle!
+    end
+
+
+
+end 
