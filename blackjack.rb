@@ -1,3 +1,101 @@
+
+
+
+class Card 
+    attr_reader :suit, :value 
+
+    def initialize(suit, value)
+        @suit = suit 
+        @value = value     
+    end 
+
+    def value 
+        return 10 if ["J", "Q", "K"].include(@value)
+        return 11 if @value == 'A'
+        return @value
+    
+    end
+
+
+    def to_s
+        "#{@value} - #{suit}"
+    end  
+
+end 
+
+class Deck
+
+    attr_reader  :cards
+
+    def initialize 
+        @cards = []
+        build_cards
+    end 
+
+    def take!
+        @cards.shift
+    end
+
+        private 
+            def build_cards 
+                [:clubs, :diamonds, :spades, :hearts].each do |suit|
+                (2..10).each do |number|
+                @cards << Card.new(suit, number)
+                end 
+                ['J', 'Q', 'K', 'A'].each do |face|
+                @cards << Card.new(suit, face)
+                end
+                end 
+         @cards.shuffle!
+            end
+     
+
+end 
+
+
+class Hand 
+    attr_reader :cards
+
+    def initialize(deck)
+      @deck = deck 
+      @cards = []
+    end
+
+    def hit!
+        @cards << @deck.take!
+    end 
+
+    def value
+        val = 0
+        @cards.each do |card|
+            val += card.value
+        end 
+        val
+    end 
+
+
+    def to_s
+     str = ""
+        @cards.each do |card|
+        str += "#{card}  "
+        end 
+        str.strip
+
+    end 
+end 
+
+deck = Deck.new 
+dealer = Hand.new(deck)
+player = Hand.new(deck)
+
+player.hit!
+player.hit!
+dealer.hit!
+
+puts "dealer: #{dealer}"
+puts "player: #{player}"
+
+
 =begin
 1. Distributing the cards
 2. Play users hand
@@ -26,101 +124,6 @@
 5. Go back to 1. and play new game
 
 =end
-
-
-
-# How can I represent a card?
-# How can I represent the card deck?
-# How can I represent the cards that have dealer and player 
-
-
-class Card 
-    attr_reader :suit, :value 
-
-    def initialize(suit, value)
-        @suit = suit 
-        @value = value     
-    end 
-
-    def value 
-        return 10 if ["J", "Q", "K"].include(@value)
-        return 11 if @value == 'A'
-        return @value
-    
-    end
-end 
-
-
-c1 = Card.new(:hearts, 9)
-c2 = Card.new(:clubs, 5)
-
-
-class Deck
-
-    attr_reader  :cards
-
-    def initialize 
-        @cards = []
-        build_cards
-    end 
-
-    def take!
-        @cards.shift
-    end
-
-        private 
-            def build_cards 
-                [:clubs, :diamonds, :spades, :hearts].each do |suit|
-                (2..10).each do |number|
-                @cards << Card.new(suit, number)
-                end 
-                ['J', 'Q', 'K', 'A'].each do |face|
-                @cards << Card.new(suit, face)
-                end
-            end 
-         @cards.shuffle!
-        end
-     
-
-end 
-
-
-class Hand 
-    attr_reader :cards
-
-    def initialize(deck)
-      @deck = deck 
-      @cards = []
-    end
-
-    def hit!
-        @cards << @deck.take!
-    end 
-
-    def value
-
-        val = 0
-        @cards.each do |card|
-            val += card.value
-        end 
-        val
-    end 
-
-
-end 
-
-deck = Deck.new 
-hand = Hand.new(deck)
-
-puts "the deck has has #{deck.cards.length} cards"
-puts "the hand has #{hand.cards.length}"
-
-hand.hit!
-
-puts "the deck has has #{deck.cards.length} cards"
-puts "the hand has #{hand.cards.length}"
-
-
 
 
 
