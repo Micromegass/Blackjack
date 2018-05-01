@@ -34,7 +34,6 @@
 # How can I represent the cards that have dealer and player 
 
 
-
 class Card 
     attr_reader :suit, :value 
 
@@ -56,15 +55,18 @@ c1 = Card.new(:hearts, 9)
 c2 = Card.new(:clubs, 5)
 
 
-
 class Deck
 
     attr_reader  :cards
 
     def initialize 
-
         @cards = []
         build_cards
+    end 
+
+    def take!
+        @cards.shift
+    end
 
         private 
             def build_cards 
@@ -76,8 +78,40 @@ class Deck
                 @cards << Card.new(suit, face)
                 end
             end 
-        @cards.shuffle!
+         @cards.shuffle!
         end
-    end 
+     
 
 end 
+
+
+class Hand 
+    attr_reader :cards
+
+    def initialize(deck)
+      @deck = deck 
+      @cards = []
+    end
+
+    def hit!
+        @cards << @deck.take!
+    end 
+
+
+end 
+
+deck = Deck.new 
+hand = Hand.new(deck)
+
+puts "the deck has has #{deck.cards.length} cards"
+puts "the hand has #{hand.cards.length}"
+
+hand.hit!
+
+puts "the deck has has #{deck.cards.length} cards"
+puts "the hand has #{hand.cards.length}"
+
+
+
+
+
