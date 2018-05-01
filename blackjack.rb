@@ -93,36 +93,69 @@ player.hit!
 player.hit!
 dealer.hit!
 
-puts "dealer: #{dealer}"
-puts "player: #{player}"
+puts
+puts "dealer: #{dealer}     (#{dealer.value})"
+puts "player: #{player}     (#{player.value})"
 
 
 
-while player.value < 21
-
+while player.value <= 21
+    puts
     puts "your turn:"
+    puts
     print "Card(c) or stand (s) "
     option = gets.chomp
 
-    
-  
+      
     if option == 'c'
         player.hit!
-        puts "   #{player}"
-
+        puts "  #{player}   (#{player.value}) "
+        puts
     elsif option == 's'
         break
 
     else 
-        puts "this is not a valid option. Please enter c or s"
+    puts "this is not a valid option. Please enter c or s"
+    puts
     puts "your turn:"
     print "Card(c) or stand (s) "
     end        
  
-
 end 
 
 
+    puts "turn of dealer"
+    puts
+
+
+if player.value < 21 
+ dealer.hit!
+ puts "  #{dealer}     (#{dealer.value})"   
+
+while dealer.value < 17
+    dealer.hit!
+    puts "  #{dealer}     (#{dealer.value})"
+end 
+end 
+
+
+
+
+if player.value > 21
+    puts "you lost =("
+elsif dealer.value > 21 
+    puts "you won =)"
+elsif dealer.value == player.value 
+    puts "draw!"
+ elsif dealer.value > player.value
+    puts "You lost =("      
+ else
+    puts "you won =)"
+end 
+
+puts
+puts "the dealer has #{dealer.value} points "
+puts "the player has #{player.value} points "
 
 
 
