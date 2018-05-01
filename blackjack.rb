@@ -97,6 +97,15 @@ class Hand
         @cards << @deck.take!
     end 
 
+    def value
+
+        val = 0
+        @cards.each do |card|
+            val += card.value
+        end 
+        val
+    end 
+
 
 end 
 
