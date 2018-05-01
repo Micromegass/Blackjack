@@ -10,7 +10,7 @@ class Card
     end 
 
     def value 
-        return 10 if ["J", "Q", "K"].include(@value)
+        return 10 if ["J", "Q", "K"].include?(@value)
         return 11 if @value == 'A'
         return @value
     
@@ -51,6 +51,7 @@ class Deck
      
 
 end 
+
 
 
 class Hand 
@@ -94,6 +95,37 @@ dealer.hit!
 
 puts "dealer: #{dealer}"
 puts "player: #{player}"
+
+
+
+while player.value < 21
+
+    puts "your turn:"
+    print "Card(c) or stand (s) "
+    option = gets.chomp
+
+    
+  
+    if option == 'c'
+        player.hit!
+        puts "   #{player}"
+
+    elsif option == 's'
+        break
+
+    else 
+        puts "this is not a valid option. Please enter c or s"
+    puts "your turn:"
+    print "Card(c) or stand (s) "
+    end        
+ 
+
+end 
+
+
+
+
+
 
 
 =begin
